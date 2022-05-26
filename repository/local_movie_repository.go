@@ -27,14 +27,14 @@ func (i *localMovieRepository) GetAllMovies() ([]model.Movie, error) {
 	return i.Movies, nil
 }
 
-func (i *localMovieRepository) GetMovie(id int) (model.Movie, error) {
+func (i *localMovieRepository) GetMovie(id string) (model.Movie, error) {
 	for _, movie := range i.Movies {
 		if movie.Id == id {
 			return movie, nil
 		}
 	}
 
-	return model.Movie{}, errors.New("RepositoryError: Movie not found in the database")
+	return model.Movie{}, custom_error.ErrMovieNotFound
 }
 
 func (i *localMovieRepository) CreateMovie(movie model.Movie) error {
@@ -44,7 +44,7 @@ func (i *localMovieRepository) CreateMovie(movie model.Movie) error {
 	return nil
 }
 
-func (i *localMovieRepository) UpdateMovie(id int, movie model.Movie) error {
+func (i *localMovieRepository) UpdateMovie(id string, movie model.Movie) error {
 	for _, m := range i.Movies {
 		if m.Id == id {
 			m.Title = movie.Title
@@ -56,10 +56,10 @@ func (i *localMovieRepository) UpdateMovie(id int, movie model.Movie) error {
 		}
 	}
 
-	return errors.New("RepositoryError: Movie not found in the database")
+	return custom_error.ErrMovieNotFound
 }
 
-func (i *localMovieRepository) DeleteMovie(id int) error {
+func (i *localMovieRepository) DeleteMovie(id string) error {
 	movieFound := false
 
 	var updatedMovieList []model.Movie
@@ -73,7 +73,7 @@ func (i *localMovieRepository) DeleteMovie(id int) error {
 	}
 
 	if !movieFound {
-		return errors.New("RepositoryError: Movie not found in the database")
+		return custom_error.ErrMovieNotFound
 	}
 
 	i.Movies = updatedMovieList

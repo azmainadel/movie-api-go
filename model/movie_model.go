@@ -1,7 +1,7 @@
 package model
 
 type Movie struct {
-	Id          int
+	Id          string
 	Title       string
 	ReleaseYear int
 	Director    string
