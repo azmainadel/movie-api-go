@@ -1,9 +1,9 @@
 package model
 
 type Movie struct {
-	id int
-	title string
-	releaseYear int
-	director string
-	score float64
+	Id          int
+	Title       string
+	ReleaseYear int
+	Director    string
+	Score       float64
 }
