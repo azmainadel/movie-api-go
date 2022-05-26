@@ -23,7 +23,7 @@ func NewLocalMovieRepository() *localMovieRepository {
 	}
 }
 
-func (i *localMovieRepository) GetMovies() ([]model.Movie, error) {
+func (i *localMovieRepository) GetAllMovies() ([]model.Movie, error) {
 	return i.Movies, nil
 }
 
